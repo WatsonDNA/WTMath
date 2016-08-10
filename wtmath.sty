@@ -4,8 +4,8 @@
 
 %%%% package declaration
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wtmath}[2016/01/09 v0.0]
-\def\wtmt@pkgname{wtmath}
+\ProvidesPackage{wtmath}[2016/08/11 dev]
+\def\wtmt@pkgname{WTMath}
 \RequirePackage{xkeyval}
 
 %%%% error messages
@@ -18,10 +18,10 @@
 %%%% utility
 \def\wtmt@get@capital@height#1{% #1:dimen
   \begingroup\sbox\z@ A\global#1\ht\z@\endgroup}
-\def\wtmt@print@right#1{\relax\ifmmode\tag*{#1}\else\hfill#1\fi}
+\def\wtmt@print@right#1{\relax\ifmmode\eqno{#1}\else\hfill#1\fi}
 
 %%%% use library
-\def\usemathlibrary#1{\input{wtmath-#1.def}}
+\def\usemathlibrary#1{\input{lib/wtmath-#1.def}}
 
 %%%% for setting
 \def\relmiddle#1{\mathrel{}\middle#1\mathrel{}}
@@ -30,15 +30,17 @@
 
 %%%% proof
 \def\qed{\wtmt@print@right\wtmt@halmos}
-\def\wtmt@halmos{\begingroup
-  \wtmt@get@capital@height\wtmt@tempdima
-  \rule[-.15\wtmt@tempdima]{.6\wtmt@tempdima}{1.2\wtmt@tempdima}%
+\def\wtmt@halmos{%
+  \begingroup
+    \wtmt@get@capital@height\wtmt@tempdima
+    \rule[-.15\wtmt@tempdima]{.6\wtmt@tempdima}{1.2\wtmt@tempdima}%
   \endgroup}
 
 %%%% sets
-\def\bar#1{\begingroup
-  \wtmt@get@capital@height\wtmt@tempdima
-  \overline{#1\rule{0pt}{\wtmt@tempdima}}
+\def\bar#1{%
+  \begingroup
+    \wtmt@get@capital@height\wtmt@tempdima
+    \overline{#1\rule{0pt}{\wtmt@tempdima}}%
   \endgroup}
 
 %% EOF
