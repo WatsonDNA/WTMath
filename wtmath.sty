@@ -6,7 +6,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{wtmath}[2016/08/11 dev]
 \def\wtmt@pkgname{WTMath}
-\RequirePackage{xkeyval}
+\RequirePackage{xkeyval,amsmath}
 
 %%%% error messages
 \def\wtmt@warn{\PackageWarningNoLine\wtmt@pkgname}
@@ -24,23 +24,27 @@
 \def\usemathlibrary#1{\input{lib/wtmath-#1.def}}
 
 %%%% for setting
-\def\relmiddle#1{\mathrel{}\middle#1\mathrel{}}
-\def\mathbold#1{\text{\boldmath $#1$}}
-\def\exchangecmd#1#2{\let\wtmt@temp#1\let#1#2\let#2\wtmt@temp}
+\newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
+\newcommand{\mathbold}[1]{\text{\boldmath$#1$}}
+\newcommand{\exchangecmd}[2]{\let\wtmt@temp#1\let#1#2\let#2\wtmt@temp}
 
-%%%% proof
-\def\qed{\wtmt@print@right\wtmt@halmos}
+%%%% basic commands
+\newcommand{\func}[1]{\mathrm{#1}}
+\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
+\newcommand{\qed}{\wtmt@print@right\wtmt@halmos}
+
+%%%% patch to amsmath
+\renewcommand{\bar}[1]{%
+  \begingroup
+    \wtmt@get@capital@height\wtmt@tempdima
+    \overline{#1\rule{0pt}{\wtmt@tempdima}}%
+  \endgroup}
+
+%%%% symbols
 \def\wtmt@halmos{%
   \begingroup
     \wtmt@get@capital@height\wtmt@tempdima
     \rule[-.15\wtmt@tempdima]{.6\wtmt@tempdima}{1.2\wtmt@tempdima}%
-  \endgroup}
-
-%%%% sets
-\def\bar#1{%
-  \begingroup
-    \wtmt@get@capital@height\wtmt@tempdima
-    \overline{#1\rule{0pt}{\wtmt@tempdima}}%
   \endgroup}
 
 %% EOF

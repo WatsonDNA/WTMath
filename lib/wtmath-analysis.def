@@ -1,0 +1,9 @@
+%
+% wtmath-analysis.def
+%
+
+\makeatletter
+
+\newcommand{\dc}{\;\mathrm{d}}
+
+%% EOF

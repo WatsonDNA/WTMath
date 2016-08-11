@@ -1,0 +1,17 @@
+%
+% wtmath-lambda.def
+%
+
+\makeatletter
+
+\newcommand{\fap}[1]{\mathopen{}\left(#1\right)\mathclose{}}
+\newcommand{\fab}{\@ifstar\wtmt@ofab\wtmt@fab}
+\def\wtmt@fab#1#2{\mathopen{}\left(\lambda #1\!\centerdot\!#2\right)\mathclose{}}
+\def\wtmt@ofab#1#2{\lambda #1\!\centerdot\!#2}
+\newcommand{\aequiv}{\equiv_\alpha}
+\newcommand{\bred}{\rightarrow_\beta}
+\newcommand{\breds}{\twoheadrightarrow_\beta}
+\newcommand{\pred}{\rightarrow_{\mathrm{p}}}
+\newcommand{\preds}{\twoheadrightarrow_{\mathrm{p}}}
+
+%% EOF
