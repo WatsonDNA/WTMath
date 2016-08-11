@@ -4,6 +4,7 @@
 
 \makeatletter
 
+\newcommand{\card}[1]{\left|#1\right|}
 \newcommand{\set}[1]{\bgroup\def\mid{\relmiddle|}\left\{#1\right\}\egroup}
 \newcommand{\oset}[1]{\left(#1\right)}
 \newcommand{\powerset}[1]{\mathcal{P}(#1)}
