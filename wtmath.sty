@@ -21,7 +21,16 @@
 \def\wtmt@print@right#1{\relax\ifmmode\eqno{#1}\else\hfill#1\fi}
 
 %%%% use library
-\def\usemathlibrary#1{\input{lib/wtmath-#1.def}}
+\define@cmdkeys[wtmt]{lib}[wtmt@temp@]{library}
+\def\wtmt@set@library#1{\setkeys[wtmt]{lib}{library=#1}}
+\newcommand{\usemathlibrary}[1]{%
+  \@for\wtmt@member:=#1\do{%
+    \expandafter\wtmt@set@library\expandafter{\wtmt@member}%
+    \expandafter\wtmt@usemathlibrary\expandafter{\wtmt@temp@library}}}
+\def\wtmt@usemathlibrary#1{%
+  \IfFileExists{lib/wtmath-#1.def}
+    {\input{lib/wtmath-#1.def}}
+    {\wtmt@error{Library '#1' does not exist}}}
 
 %%%% for setting
 \newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
