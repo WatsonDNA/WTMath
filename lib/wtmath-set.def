@@ -4,9 +4,9 @@
 
 \makeatletter
 
-\newcommand{\card}[1]{\left|#1\right|}
-\newcommand{\set}[1]{\bgroup\def\mid{\relmiddle|}\left\{#1\right\}\egroup}
-\newcommand{\oset}[1]{\left(#1\right)}
+\newcommand{\card}[1]{\mathopen{}\left|#1\right|\mathclose{}}
+\newcommand{\set}[1]{\bgroup\def\mid{\relmiddle|}\mathopen{}\left\{#1\right\}\mathclose{}\egroup}
+\newcommand{\oset}[1]{\mathopen{}\left(#1\right)\mathclose{}}
 \newcommand{\powerset}[1]{\mathcal{P}(#1)}
 \newcommand{\nset}{\mathbold{N}}
 \newcommand{\zset}{\mathbold{Z}}
