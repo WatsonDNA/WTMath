@@ -1,0 +1,150 @@
+\documentclass[a4paper,uplatex,leqno]{jsarticle}
+
+\usepackage{otf}
+\usepackage{enumitem}
+\usepackage{wtmath}
+\usepackage{shortvrb}
+
+\setlist[description]{font=\normalfont}
+\MakeShortVerb{\|}
+\newcommand{\PkgName}{\textsf{WTMath}}
+\newcommand{\Meta}[1]{$\langle$\mbox{}{\normalfont\textit{#1}}\mbox{}$\rangle$}
+\newenvironment{syntax}{\begin{quote}\small}{\end{quote}}
+\newcommand{\cmd}[1]{\texttt{\def\{{\char`\{}\def\}{\char`\}}\texttt{\symbol{'134}}#1}}
+
+\makeatletter
+\let\halmos\wtmt@halmos
+\makeatother
+
+\title{\PkgName パッケージ (dev)}
+\author{ワトソン}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+WTシリーズは著者が\LaTeX 文書作成にあたってよく利用するマクロを集めたものである．
+\PkgName パッケージはこのWTシリーズを構成するパッケージの1つであり，様々な数式を記述する際に
+便利なマクロを収録している．多くのマクロは使用する分野別にライブラリとしてまとめてあり，
+必要に応じて読み込むことが可能である．サポート対象は任意の\TeX エンジンと\LaTeXe の組み合わせ
+で，動作には\textsf{amsmath}, \textsf{xkeyval}パッケージが必要である．
+\end{abstract}
+
+\section{動作要件}
+
+\PkgName パッケージの動作要件は以下の通りである．
+%
+\begin{itemize}
+\item \TeX エンジン：任意
+\item \TeX フォーマット：\LaTeXe
+\item ドキュメントクラス：任意
+\item 依存パッケージ：\textsf{amsmath}, \textsf{xkeyval}
+\end{itemize}
+
+\section{パッケージ読み込み}
+
+読み込みには |\usepackage| 命令を用いる．オプションは存在しない．
+%
+\begin{syntax}
+|\usepackage{wtmath}|
+\end{syntax}
+
+\section{基本的な命令}
+
+\PkgName パッケージを読み込むと，その時点で次のような命令が定義される．また，\textsf{amsmath}%
+パッケージに含まれるマクロの一部は，より拡張された定義に置き換えられる．
+
+\subsection{数式用の命令}
+
+\PkgName はデフォルトで以下の数式用命令を定義する．これらの命令は特に断りがない限り数式モード
+でのみ使用可能である．
+%
+\begin{description}
+\item[\cmd{func\{\Meta{function name}\}}]
+関数名を出力する際に用いる．%具体的には\Meta{function name}の内容を立体（ローマン体）で出力する．
+%
+\item[\cmd{eqsep}]
+数式間のスペースを出力する．
+%
+\item[\cmd{then}]
+記号$\then$を出力する．
+%
+\item[\cmd{st}]
+立体で文字列``such that''を出力する．その前後には半角スペースが入る．
+%
+\item[\cmd{tand}]
+立体で文字列``and''を出力する．その前後には半角スペースが入る．
+%
+\item[\cmd{tor}]
+立体で文字列``or''を出力する．その前後には半角スペースが入る．
+%
+\item[\cmd{defeq}]
+定義等号を表す記号$\defeq$を出力する．
+%
+\item[\cmd{defiff}]
+定義同値を表す記号$\defiff$を出力する．
+%
+\item[\cmd{qed}]
+証明終わりを表すハルモス記号$\halmos$をページの右端に出力する．この命令は数式モードの内外で
+使用できる．ただし，別行立ての数式環境内で使用する場合は式番号が付かない状態である必要がある．
+\end{description}
+
+\subsection{amsmathの上位互換命令}
+
+次の命令は\textsf{amsmath}パッケージによって定義されているものであるが，\PkgName
+を読み込むとその定義が上書きされる．
+%
+\begin{description}
+\item[\cmd{bar\{\Meta{commands}\}}]
+\Meta{commands}の上に棒線を引く．例えば |\bar{A\times B}| の出力は$\bar{A\times B}$となる．
+\end{description}
+
+\subsection{マクロ用の命令}
+
+以下のマクロは文書中に直接書き込むためというよりも，数式用のマクロを本パッケージのユーザが
+新たに定義する際に利用することを意図して定義されているものである．
+%
+\begin{description}
+\item[\cmd{relmiddle\{\Meta{symbol}\}}]
+指定した\Meta{symbol}を括弧類の間で使用される関係演算子として出力する．すなわち\TeX
+の |\mathrel| と\LaTeX の |\middle| を合わせたような働きをする命令である．数式モードでのみ
+使用可能．
+%
+\item[\cmd{mathbold\{\Meta{commands}\}}]
+数式モード内で，引数に与えた\Meta{commands}の内容を斜体の太字（ボールド体）で出力する．
+%
+\item[\cmd{exchangecmd\{\Meta{command 1}\}\{\Meta{command 2}\}}]
+与えられた2つの命令の定義を入れ替える．
+\end{description}
+
+\section{ライブラリ読み込み}
+
+\PkgName は，パッケージを読み込むだけではすべての命令が使用可能な状態にはならない．
+マクロはその使用分野ごとにライブラリという形でまとめられ，本パッケージの使用者は必要に
+応じてライブラリを読み込むことで，それらの命令が利用可能になる．
+
+ライブラリの読み込みは |\usemathlibrary| 命令によって行う．
+%
+\begin{syntax}
+|\usemathlibrary{|\Meta{libraries}|}|
+\end{syntax}
+%
+ここで\Meta{libraries}にライブラリ名をカンマ区切りで記述することで，一度に複数のライブラリを
+読み込むことも可能である．この命令はプリアンブル以外でも使用可能で，|{| や |}| によるスコープの制御を受ける．
+
+\section{各ライブラリの詳細}
+
+\subsection{analysis}
+
+\textsf{analysis}ライブラリは極限や微分・積分に関わる命令を集めたものである．
+
+\subsection{lambda}
+
+\textsf{lambda}ライブラリはラムダ計算に関わる命令を集めたものである．
+
+\subsection{set}
+
+\textsf{set}ライブラリは集合に関わる命令を集めたものである．
+
+\end{document}
