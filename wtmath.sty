@@ -15,7 +15,13 @@
 %%%% new dimen
 \newdimen\wtmt@tempdima
 
+%%%% librarys
+\newif\if@wtmt@analysis@\@wtmt@analysis@false
+\newif\if@wtmt@lambda@\@wtmt@lambda@false
+\newif\if@wtmt@set@\@wtmt@set@false
+
 %%%% utility
+\def\wtmt@name@use#1{\csname #1\endcsname}
 \def\wtmt@get@capital@height#1{% #1:dimen
   \begingroup\sbox\z@ A\global#1\ht\z@\endgroup}
 \def\wtmt@print@right#1{\relax\ifmmode\eqno{#1}\else\hfill#1\fi}
@@ -28,9 +34,10 @@
     \expandafter\wtmt@set@library\expandafter{\wtmt@member}%
     \expandafter\wtmt@usemathlibrary\expandafter{\wtmt@temp@library}}}
 \def\wtmt@usemathlibrary#1{%
-  \IfFileExists{lib/wtmath-#1.def}
-    {\input{lib/wtmath-#1.def}}
-    {\wtmt@error{Library '#1' does not exist}}}
+  \@ifundefined{if@wtmt@#1@}
+    {\wtmt@error{Library '#1' does not exist}}
+    {\wtmt@name@use{if@wtmt@#1@}\else
+      \wtmt@name@use{@wtmt@#1@true}\input{lib/wtmath-#1.def}\fi}}
 
 %%%% for setting
 \newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
