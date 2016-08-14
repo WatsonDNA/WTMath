@@ -36,7 +36,7 @@
 \def\wtmt@usemathlibrary#1{%
   \@ifundefined{if@wtmt@#1@}
     {\wtmt@error{Library '#1' does not exist}}
-    {\wtmt@name@use{if@wtmt@#1@}\else
+    {\wtmt@name@use{if@wtmt@#1@}\wtmt@warn{Library '#1' already loaded}\else
       \wtmt@name@use{@wtmt@#1@true}\input{lib/wtmath-#1.def}\fi}}
 
 %%%% for setting
