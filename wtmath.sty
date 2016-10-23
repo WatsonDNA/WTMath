@@ -24,7 +24,7 @@
 \def\wtmt@name@use#1{\csname #1\endcsname}
 \def\wtmt@get@capital@height#1{% #1:dimen
   \begingroup\sbox\z@ A\global#1\ht\z@\endgroup}
-\def\wtmt@print@right#1{\relax\ifmmode\eqno{#1}\else\hfill#1\fi}
+\def\wtmt@print@right#1{\relax\ifmmode\tag*{#1}\else\hfill#1\fi}
 
 %%%% use library
 \define@cmdkeys[wtmt]{lib}[wtmt@temp@]{library}
