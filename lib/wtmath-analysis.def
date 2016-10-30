@@ -2,8 +2,6 @@
 % wtmath-analysis.def
 %
 
-\makeatletter
-
 \newcommand{\dc}{\;\mathrm{d}}
 \newcommand{\abs}[1]{\mathopen{}\left|#1\right|\mathclose{}}
 \newcommand{\order}[1]{O\mathopen{}\left(#1\right)\mathclose{}}

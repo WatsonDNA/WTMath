@@ -2,8 +2,6 @@
 % wtmath-lambda.def
 %
 
-\makeatletter
-
 \newcommand{\fap}[1]{\mathopen{}\left(#1\right)\mathclose{}}
 \newcommand{\fab}{\@ifstar\wtmt@ofab\wtmt@fab}
 \def\wtmt@fab#1#2{\mathopen{}\left(\lambda #1\!\centerdot\!#2\right)\mathclose{}}

@@ -2,8 +2,6 @@
 % wtmath-set.def
 %
 
-\makeatletter
-
 \newcommand{\card}[1]{\mathopen{}\left|#1\right|\mathclose{}}
 \newcommand{\set}[1]{\bgroup\def\mid{\relmiddle|}\mathopen{}\left\{#1\right\}\mathclose{}\egroup}
 \newcommand{\orderedset}[1]{\mathopen{}\left(#1\right)\mathclose{}}

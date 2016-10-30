@@ -13,6 +13,7 @@
 \def\wtmt@error{\PackageError\wtmt@pkgname}
 
 %%%% new dimen
+\newcount\wtmt@tempcnta
 \newdimen\wtmt@tempdima
 
 %%%% librarys
@@ -34,10 +35,19 @@
     \expandafter\wtmt@set@library\expandafter{\wtmt@member}%
     \expandafter\wtmt@usemathlibrary\expandafter{\wtmt@temp@library}}}
 \def\wtmt@usemathlibrary#1{%
-  \@ifundefined{if@wtmt@#1@}
-    {\wtmt@error{Library '#1' does not exist}}
-    {\wtmt@name@use{if@wtmt@#1@}\wtmt@warn{Library '#1' already loaded}\else
-      \wtmt@name@use{@wtmt@#1@true}\input{lib/wtmath-#1.def}\fi}}
+  \@ifundefined{if@wtmt@#1@}{%
+    \wtmt@error{Library '#1' does not exist}%
+  }{%
+    \wtmt@name@use{if@wtmt@#1@}%
+      \wtmt@warn{Library '#1' already loaded}%
+    \else
+      \wtmt@name@use{@wtmt@#1@true}%
+      \wtmt@tempcnta\catcode`\@
+      \catcode`\@=11\relax
+      \input{wtmath-#1.def}%
+      \catcode`\@\wtmt@tempcnta
+    \fi
+  }}
 
 %%%% for setting
 \newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
