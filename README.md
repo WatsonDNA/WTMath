@@ -9,14 +9,18 @@ WTRef package extend cross-reference system of LaTeX2e and introduce concepts of
 * Document class: any class
 * Prerequisite package: amsmath, xkeyval
 
-## Installation
+## Notice
 
-Download the package from [release page](https://github.com/WatsonDNA/WTMath/releases). Then put *.sty file and lib directory wherever TeX can find.
+All files in this package are under developing. Almost all documents for those has not been completed yet.
 
 ## Documents
 
-Documents for this pacakge are in [doc directory](./doc) ([English](./doc/wtmath.pdf) and [Japanese](./doc/wtmath-ja.pdf)).
+Documents for this pacakge are in [doc directory](./doc).
 
 ## License
 
 This package released under [the MIT license](./LICENSE).
+
+---
+
+Takuto ASAKURA ([wtsnjp](https://twitter.com/wtsnjp))
