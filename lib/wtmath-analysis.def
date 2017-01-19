@@ -1,9 +1,19 @@
-%
-% wtmath-analysis.def
-%
+%%
+%% This is file `wtmath-analysis.def'.
+%%
+%% Copyright (c) 2016-2017 Takuto ASAKURA (wtsnjp)
+%%   GitHub:   https://github.com/wtsnjp
+%%   Twitter:  @wtsnjp
+%%
+%% This package is distributed under the MIT License.
+%%
 
-\newcommand{\dc}{\;\mathrm{d}}
+% Define commands
+\newcommand{\dc}{\,\mathrm{d}}
 \newcommand{\abs}[1]{\mathopen{}\left|#1\right|\mathclose{}}
 \newcommand{\order}[1]{O\mathopen{}\left(#1\right)\mathclose{}}
+
+% All done
+\endinput
 
 %% EOF

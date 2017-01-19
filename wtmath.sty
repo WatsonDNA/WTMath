@@ -1,62 +1,79 @@
-%
-% wtmath.sty
-%
+%%
+%% This is file `wtmath.sty'.
+%%
+%% Copyright (c) 2016-2017 Takuto ASAKURA (wtsnjp)
+%%   GitHub:   https://github.com/wtsnjp
+%%   Twitter:  @wtsnjp
+%%
+%% This package is distributed under the MIT License.
+%%
 
-%%%% package declaration
+% Package declaration
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wtmath}[2016/08/11 dev]
+\ProvidesPackage{wtmath}[2017/01/19 dev]
 \def\wtmt@pkgname{WTMath}
 \RequirePackage{xkeyval,amsmath}
 
-%%%% error messages
+% Messages
+\def\wtmt@info{\PackageInfo\wtmt@pkgname}
 \def\wtmt@warn{\PackageWarningNoLine\wtmt@pkgname}
 \def\wtmt@error{\PackageError\wtmt@pkgname}
 
-%%%% new dimen
-\newcount\wtmt@tempcnta
+% New dimen
 \newdimen\wtmt@tempdima
 
-%%%% librarys
-\newif\if@wtmt@analysis@\@wtmt@analysis@false
-\newif\if@wtmt@lambda@\@wtmt@lambda@false
-\newif\if@wtmt@set@\@wtmt@set@false
-
-%%%% utility
+% Utility commands
 \def\wtmt@name@use#1{\csname #1\endcsname}
+\def\wtmt@name@def#1{\expandafter\def\csname #1\endcsname}
 \def\wtmt@get@capital@height#1{% #1:dimen
   \begingroup\sbox\z@ A\global#1\ht\z@\endgroup}
 \def\wtmt@print@right#1{\relax\ifmmode\tag*{#1}\else\hfill#1\fi}
 
-%%%% use library
+% Trimming spaces
+\def\wtmt@inner@setkeys#1{\setkeys[wtmt]{inner}{key=#1}}
+\def\wtmt@trimming@spaces#1{%
+  \define@key[wtmt]{inner}{key}{\def#1{##1}}%
+  \expandafter\wtmt@inner@setkeys\expandafter{#1}%
+  \disable@keys[wtmt]{inner}{key}}
+
+% Symbols
+\def\wtmt@halmos{%
+  \begingroup
+    \wtmt@get@capital@height\wtmt@tempdima
+    \rule[-.15\wtmt@tempdima]{.6\wtmt@tempdima}{1.2\wtmt@tempdima}%
+  \endgroup}
+
+% Define \usemathlibrary command
 \define@cmdkeys[wtmt]{lib}[wtmt@temp@]{library}
 \def\wtmt@set@library#1{\setkeys[wtmt]{lib}{library=#1}}
 \newcommand{\usemathlibrary}[1]{%
-  \@for\wtmt@member:=#1\do{%
-    \expandafter\wtmt@set@library\expandafter{\wtmt@member}%
-    \expandafter\wtmt@usemathlibrary\expandafter{\wtmt@temp@library}}}
+  \@for\wtmt@current@lib:=#1\do{%
+    \wtmt@trimming@spaces\wtmt@current@lib
+    \wtmt@usemathlibrary\wtmt@current@lib}}
 \def\wtmt@usemathlibrary#1{%
-  \@ifundefined{if@wtmt@#1@}{%
-    \wtmt@error{Library '#1' does not exist}%
-  }{% else
-    \wtmt@name@use{if@wtmt@#1@}%
-      \wtmt@warn{Library '#1' already loaded}%
-    \else
-      \wtmt@name@use{@wtmt@#1@true}%
-      \wtmt@tempcnta\catcode`\@
-      \catcode`\@=11\relax
+  \IfFileExists{wtmath-#1.def}{%
+    \@ifundefined{wtmt@lib@#1}{%
+      \wtmt@name@def{wtmt@lib@#1}{#1}%
+      \wtmt@info{Load math library `#1'}%
+      \edef\wtmt@atcode{\the\catcode`\@}\makeatletter
       \input{wtmath-#1.def}%
-      \catcode`\@\wtmt@tempcnta
-    \fi
+      \catcode`\@=\wtmt@atcode
+    }{% else
+      \wtmt@warn{Library `#1' already loaded}%
+    }%
+  }{% else
+    \wtmt@error
+      {Math library `#1' does not exist}
+      {Please check the spelling}%
   }}
 
-%%%% for setting
+% Commands for setting
 \newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
-\newcommand{\mathbold}[1]{\text{\boldmath$#1$}}
 \newcommand{\exchangecmd}[2]{\let\wtmt@temp#1\let#1#2\let#2\wtmt@temp}
 
-%%%% basic commands
+% Basic commands
 \newcommand{\func}[1]{\mathrm{#1}}
-\newcommand{\eqsep}{\;}
+\newcommand{\eqsep}{\quad}
 \newcommand{\then}{\Rightarrow}
 \newcommand{\st}{\text{\space such that\space}}
 \newcommand{\tand}{\text{\space and\space}}
@@ -65,18 +82,15 @@
 \newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
 \newcommand{\qed}{\wtmt@print@right\wtmt@halmos}
 
-%%%% patch to amsmath
+% Patch to regular commands
 \renewcommand{\bar}[1]{%
-  \begingroup
+  \bgroup
     \wtmt@get@capital@height\wtmt@tempdima
     \overline{#1\rule{0pt}{\wtmt@tempdima}}%
-  \endgroup}
+  \egroup}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
 
-%%%% symbols
-\def\wtmt@halmos{%
-  \begingroup
-    \wtmt@get@capital@height\wtmt@tempdima
-    \rule[-.15\wtmt@tempdima]{.6\wtmt@tempdima}{1.2\wtmt@tempdima}%
-  \endgroup}
+% All done
+\endinput
 
 %% EOF

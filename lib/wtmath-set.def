@@ -1,15 +1,25 @@
-%
-% wtmath-set.def
-%
+%%
+%% This is file `wtmath-set.def'.
+%%
+%% Copyright (c) 2016-2017 Takuto ASAKURA (wtsnjp)
+%%   GitHub:   https://github.com/wtsnjp
+%%   Twitter:  @wtsnjp
+%%
+%% This package is distributed under the MIT License.
+%%
 
+% Define commands
 \newcommand{\card}[1]{\mathopen{}\left|#1\right|\mathclose{}}
 \newcommand{\set}[1]{\bgroup\def\mid{\relmiddle|}\mathopen{}\left\{#1\right\}\mathclose{}\egroup}
 \newcommand{\orderedset}[1]{\mathopen{}\left(#1\right)\mathclose{}}
 \newcommand{\powerset}[1]{\mathcal{P}(#1)}
-\newcommand{\nset}{\mathbold{N}}
-\newcommand{\zset}{\mathbold{Z}}
-\newcommand{\qset}{\mathbold{Q}}
-\newcommand{\rset}{\mathbold{R}}
-\newcommand{\cset}{\mathbold{C}}
+\newcommand{\nset}{\mathbf{N}}
+\newcommand{\zset}{\mathbf{Z}}
+\newcommand{\qset}{\mathbf{Q}}
+\newcommand{\rset}{\mathbf{R}}
+\newcommand{\cset}{\mathbf{C}}
+
+% All done
+\endinput
 
 %% EOF
