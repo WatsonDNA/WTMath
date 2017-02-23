@@ -16,6 +16,9 @@
 \newcommand{\aequiv}{\equiv_\alpha}
 \newcommand{\bred}{\rightarrow_\beta}
 \newcommand{\breds}{\twoheadrightarrow_\beta}
+\newcommand{\eequiv}{\equiv_\eta}
+\newcommand{\ered}{\rightarrow_\eta}
+\newcommand{\ereds}{\twoheadrightarrow_\eta}
 \newcommand{\pred}{\rightarrow_{\mathrm{p}}}
 \newcommand{\preds}{\twoheadrightarrow_{\mathrm{p}}}
 
