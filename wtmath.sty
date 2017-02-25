@@ -26,7 +26,7 @@
 \def\wtmt@name@use#1{\csname #1\endcsname}
 \def\wtmt@name@def#1{\expandafter\def\csname #1\endcsname}
 \def\wtmt@get@capital@height#1{% #1:dimen
-  \begingroup\sbox\z@ A\global#1\ht\z@\endgroup}
+  \bgroup\sbox\z@ A\global#1\ht\z@\egroup}
 \def\wtmt@print@right#1{\relax\ifmmode\tag*{#1}\else\hfill#1\fi}
 
 % Trimming spaces
@@ -38,10 +38,10 @@
 
 % Symbols
 \def\wtmt@halmos{%
-  \begingroup
+  \bgroup
     \wtmt@get@capital@height\wtmt@tempdima
     \rule[-.15\wtmt@tempdima]{.6\wtmt@tempdima}{1.2\wtmt@tempdima}%
-  \endgroup}
+  \egroup}
 
 % Define \usemathlibrary command
 \define@cmdkeys[wtmt]{lib}[wtmt@temp@]{library}
@@ -81,6 +81,7 @@
 \newcommand{\defeq}{:=}
 \newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
 \newcommand{\qed}{\wtmt@print@right\wtmt@halmos}
+\newcommand{\bvec}[1]{\boldsymbol{#1}}
 
 % Patch to regular commands
 %\renewcommand{\bar}[1]{%
@@ -88,7 +89,6 @@
 %    \wtmt@get@capital@height\wtmt@tempdima
 %    \overline{#1\rule{0pt}{\wtmt@tempdima}}%
 %  \egroup}
-\renewcommand{\vec}[1]{\boldsymbol{#1}}
 
 % All done
 \endinput
