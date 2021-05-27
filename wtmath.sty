@@ -80,7 +80,11 @@
 \newcommand{\tor}{\text{\space or\space}}
 \newcommand{\defeq}{:=}
 \newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
-\newcommand{\qed}{\wtmt@print@right\wtmt@halmos}
+\@ifundefined{qed}{%
+  \newcommand{\qed}{\wtmt@print@right\wtmt@halmos}
+}{%
+  \renewcommand{\qed}{\wtmt@print@right\wtmt@halmos}
+}
 \newcommand{\bvec}[1]{\boldsymbol{#1}}
 
 % Patch to regular commands
